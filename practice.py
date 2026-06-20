@@ -1,32 +1,26 @@
-"""
-webscraping  :
-
-1.static  : HTML  
-2. dynamic : JS  ===>API 
-
-# lib :: requests , beautifulsoup : 
-
-"""
 import  requests
 from bs4 import BeautifulSoup
+
 # ex:1 
 '''
 html = """
 <h1>STUDENTS </h1>
 <p>my name is  dishant. i am a student</p>
 <title>INTRODUCTION</title>
+    
+    """
+beautiful_soup = BeautifulSoup(html,"html.parser")
 
-"""
-soup = BeautifulSoup(html,"html.parser") 
-h1_tag = soup.find("h1")
-title = soup.find("title")
-p_tag = soup.find("p")
+h1_tag  = beautiful_soup.find("h1")
+p_tag = beautiful_soup.find("p")
 
 print(h1_tag.text)
-print(title.text)
 print(p_tag.text)
 '''
-# ex:2 
+#ex:2 
+
+from bs4 import BeautifulSoup
+
 html = """
 <html>
 <head>
@@ -67,27 +61,23 @@ html = """
 
 </body>
 </html>
-
 """
+
 soup = BeautifulSoup(html, "html.parser")
 
-title = soup.find("title")
-h1_tag = soup.find("h1")
-p_tag = soup.find("p")
-div_tag = soup.find("div")
+h1_tag = soup.find("h1").text
+p_tag = soup.find("p").text
+title_tag = soup.find("title").text
+span_tag = soup.find("span").text
 link_tag = soup.find("a")['href']
-
-ul_tag = soup.find_all("ul")
-table_tag = soup.find_all("tr")
-print(title.text)
-print(h1_tag.text)
-print(p_tag.text)
-print(div_tag.text)
-print(link_tag)
-
 
 for i in soup.find_all("li"):
     print(i.text)
 
 for j in soup.find_all("td"):
     print(j.text)
+print(h1_tag)
+print(p_tag)
+print(title_tag)
+print(span_tag)
+print(link_tag)
