@@ -32,6 +32,7 @@ cookies = {
     "username": "dishant"
 }
 
+
 6. 
 Session stores login information and cookies.
 
@@ -89,3 +90,6 @@ soup = BeautifulSoup(reponse.text, "html.parser")
 
 print(reponse.status_code)
 print(reponse.json())
+
+
+# 2 ,3 ,9 16 23 :750 
