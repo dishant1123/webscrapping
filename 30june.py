@@ -49,5 +49,5 @@ tages = soup.select("div.tags")
 for j in tages:
     print(j.text)
     
-# pagination :
+
 
