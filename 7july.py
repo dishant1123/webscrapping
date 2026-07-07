@@ -18,6 +18,6 @@ driver.get("https://quotes.toscrape.com/js/")
 time.sleep(3)
 print(driver.current_url)
 print(driver.title)
-# print(driver.page_source())
+print(driver.page_source[:500])
 
 driver.quit()
