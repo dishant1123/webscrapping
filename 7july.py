@@ -21,3 +21,5 @@ print(driver.title)
 print(driver.page_source[:500])
 
 driver.quit()
+
+# !pip install selenium

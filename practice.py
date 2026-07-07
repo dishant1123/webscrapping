@@ -229,7 +229,7 @@ print(response.json())
 """
 
 # ex :2 
-import requests
+'''import requests
 
 url = "https://httpbin.org/headers"
 
@@ -238,7 +238,7 @@ headers = {
     "Accept-Language": "en-US"
 }
 response = requests.get(url, headers=headers)
-print(response.json())
+print(response.json())'''
 """
 ✅ You are not modifying a JSON file.
 ✅ You create a Python dictionary of headers.
@@ -249,7 +249,7 @@ print(response.json())
 A cookie is a small piece of data that a website stores in your browser (or sends with requests) to remember information about you.
 """
 
-import requests
+"""import requests
 
 url = "https://httpbin.org/cookies"
 cookies = {
@@ -258,9 +258,9 @@ cookies = {
 
 response = requests.get(url, cookies=cookies)
 print(response.json())
-
+"""
 #ex:2 
-import requests
+"""import requests
 
 url = "https://httpbin.org/cookies"
 
@@ -273,3 +273,126 @@ cookies = {
 response = requests.get(url, cookies=cookies)
 
 print(response.json())
+"""
+import selenium
+# print(selenium.__version__)
+
+"""
+webdriver allow you to automate browser interactions.
+Python
+↓
+WebDriver
+↓
+Chrome
+"""
+
+# ex :1 
+"""
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+driver.get("https://example.com")
+
+input("Press Enter to close...")
+driver.quit()
+"""
+
+# ex :2  get page  title  
+
+"""from selenium import webdriver
+import time  
+
+driver = webdriver.Chrome()
+driver.get("https://example.com")
+
+# time.sleep(3)
+# print(driver.title)
+driver.quit()
+"""
+# get  current url  : 
+"""
+print(driver.current_url)
+"""
+
+# HTML  code  : 
+"""
+print(driver.page_source) # print  500 character : driver.page_source[:500]
+"""
+
+# Finding Elements Find by Tag
+"""
+driver = driver.find_element("tag name", "h1")
+print(driver.text)
+"""
+#Find by ID
+# driver.find_element("id", "username")
+
+#Find by Class
+# driver.find_element("class name", "price")
+
+
+# for  practice  using  flipkart  website  :
+"""
+flicart HTMl  code  is to much  long so  you can print the  first 500 character  using print(driver.page_source[:500]) 
+
+"""
+import time
+import selenium
+from selenium import webdriver
+
+driver = webdriver.Chrome()  
+
+driver.get("https://www.flipkart.com/")
+
+time.sleep(5)
+
+print("title :", driver.title)
+print("current url :", driver.current_url)
+print("page source :", driver.page_source[:500])
+
+
+# pratical 1 : 
+"""
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+driver = webdriver.Chrome()
+driver.get("https://quotes.toscrape.com/js/")
+
+WebDriverWait(driver, 10).until(
+    EC.presence_of_all_elements_located((By.CLASS_NAME, "quote"))
+)
+
+quotes = driver.find_elements(By.CLASS_NAME, "quote")
+for quote in quotes:
+    text = quote.find_element(By.CLASS_NAME, "text").text
+    author = quote.find_element(By.CLASS_NAME, "author").text
+
+    print("Quote :", text)
+    print("Author:", author)
+    print("-" * 40)
+driver.quit()
+"""
+
+# practical :2
+"""from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+driver = webdriver.Chrome()
+driver.get("https://www.wikipedia.org/")
+
+time.sleep(2)  # Wait for the page to load
+
+search = driver.find_element(By.ID, "searchInput")
+search.send_keys("Python programming")
+search.submit()
+
+time.sleep(3)
+print(driver.title)
+
+driver.quit()
+"""
+
