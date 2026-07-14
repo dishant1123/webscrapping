@@ -29,7 +29,7 @@ driver.quit()
 
 #ex:3
 
-driver = webdriver.Chrome()
+"""driver = webdriver.Chrome()
 driver.get("https://quotes.toscrape.com/js/")
 
 WebDriverWait(driver, 10).until(
@@ -46,3 +46,4 @@ for i in quotes:
     print("-" * 40)
     
 driver.quit()
+"""

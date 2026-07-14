@@ -36,3 +36,21 @@ print(driver.title)
 print(driver.current_url)
 print(driver.page_source[:500])
 driver.quit()
+
+
+# ex :3 
+
+driver = webdriver.Chrome()
+driver.get("https://the-internet.herokuapp.com/javascript_alerts")
+
+# driver.find_element(By.XPATH, "//button[text()='Click for JS Alert']").click()
+driver.find_element(By.XPATH, "//button[text()='Click for JS Confirm']").click()
+
+
+time.sleep(2)
+alert = driver.switch_to.alert
+print("Alert Text:", alert.text)
+alert.accept()
+
+time.sleep(2)
+driver.quit()
