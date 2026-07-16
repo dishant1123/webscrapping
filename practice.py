@@ -336,7 +336,7 @@ print(driver.text)
 flicart HTMl  code  is to much  long so  you can print the  first 500 character  using print(driver.page_source[:500]) 
 
 """
-import time
+"""import time
 import selenium
 from selenium import webdriver
 
@@ -349,7 +349,7 @@ time.sleep(5)
 print("title :", driver.title)
 print("current url :", driver.current_url)
 print("page source :", driver.page_source[:500])
-
+"""
 
 # pratical 1 : 
 """
@@ -396,3 +396,152 @@ print(driver.title)
 driver.quit()
 """
 
+"""from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+driver = webdriver.Chrome()
+
+driver.get("https://the-internet.herokuapp.com/javascript_alerts")
+
+driver.find_element(By.XPATH, "//button[text()='Click for JS Alert']").click()
+
+time.sleep(2)
+
+alert = driver.switch_to.alert
+
+print("Alert Text:", alert.text)
+
+alert.accept()
+
+time.sleep(2)
+
+driver.quit()"""
+
+"""
+# project :1  using selenuim  :
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import pandas as pd
+
+driver = webdriver.Chrome()
+driver.maximize_window()
+
+driver.get("https://webscraper.io/test-sites/e-commerce/allinone/computers/laptops")
+
+WebDriverWait(driver,10).until(
+    EC.presence_of_all_elements_located(
+        (By.CLASS_NAME,"thumbnail")
+    )
+)
+
+names = []
+prices = []
+descriptions = []
+reviews = []
+ratings = []
+
+products = driver.find_elements(By.CLASS_NAME,"thumbnail")
+
+for product in products:
+
+    names.append(
+        product.find_element(
+            By.CLASS_NAME,
+            "title"
+        ).get_attribute("title")
+    )
+
+    prices.append(
+        product.find_element(
+            By.CLASS_NAME,
+            "price"
+        ).text
+    )
+
+    descriptions.append(
+        product.find_element(
+            By.CLASS_NAME,
+            "description"
+        ).text
+    )
+
+    reviews.append(
+        product.find_element(
+            By.CLASS_NAME,
+            "review-count"
+        ).text
+    )
+
+    ratings.append(
+        len(
+            product.find_elements(
+                By.CSS_SELECTOR,
+                ".ratings span.ws-icon-star"
+            )
+        )
+    )
+
+driver.quit()
+df = pd.DataFrame({
+    "Laptop Name": names,
+    "Price": prices,
+    "Description": descriptions,
+    "Reviews": reviews,
+    "Rating": ratings
+})
+df["Price"] = df["Price"].str.replace("$","").astype(float)
+# df.to_csv("laptops.csv",index=False)
+print(df)
+print("\nTotal Products:",len(df))
+print("\nAverage Price:",df["Price"].mean())
+print("\nHighest Rated Laptop")
+print(df[df["Rating"]==df["Rating"].max()])
+print("\nMost Expensive Laptop")
+print(df.sort_values("Price",ascending=False).head())
+print("\nMissing Values")
+print(df.isnull().sum())
+"""
+
+# tom session : 
+"""
+import pandas as pd
+
+# Scraped Data
+data = {
+    "Product": [" Laptop ", "Mouse", "Keyboard", "Laptop", None, "Monitor"],
+    "Price": ["55000", None, "1200", "55000", "800", "15000"],
+    "Rating": [4.5, 4.2, None, 4.5, 3.8, None]
+}
+
+df = pd.DataFrame(data)
+
+print("Original Data")
+print(df)
+
+# Remove extra spaces
+df["Product"] = df["Product"].str.strip()
+
+# Fill missing values
+df["Product"] = df["Product"].fillna("Unknown")
+df["Price"] = df["Price"].fillna("0")
+df["Rating"] = df["Rating"].fillna(df["Rating"].mean())
+
+# Convert data type
+df["Price"] = df["Price"].astype(int)
+
+# Remove duplicates
+df = df.drop_duplicates()
+
+print("\nCleaned Data")
+print(df)
+
+# Save files
+df.to_csv("products.csv", index=False)
+df.to_excel("products.xlsx", index=False)
+df.to_json("products.json", orient="records", indent=4)
+
+print("\nFiles Saved Successfully!")
+"""
